@@ -1,0 +1,54 @@
+mkdir -p src/app
+rm -rf app   # remove a pasta antiga na raiz, se existir
+
+# corrige: o Tailwind agora enxerga o src/
+cat > tailwind.config.js <<'EOF'
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  presets: [require("nativewind/preset")],
+  theme: { extend: {} },
+  plugins: [],
+};
+EOF
+
+# corrige: caminho do global.css (o layout agora está em src/app)
+cat > src/app/_layout.tsx <<'EOF'
+import "../../global.css";
+import { Stack } from "expo-router";
+
+export default function RootLayout() {
+  return <Stack />;
+}
+EOF
+
+cat > src/app/index.tsx <<'EOF'
+import { Link } from "expo-router";
+import { Pressable, Text, View } from "react-native";
+
+export default function Home() {
+  return (
+    <View className="flex-1 items-center justify-center gap-4 bg-white">
+      <Text className="text-2xl font-bold text-blue-500">Início</Text>
+      <Link href="/sobre" asChild>
+        <Pressable className="rounded-xl bg-blue-500 px-5 py-3 active:bg-blue-700">
+          <Text className="font-semibold text-white">Ir para Sobre</Text>
+        </Pressable>
+      </Link>
+    </View>
+  );
+}
+EOF
+
+cat > src/app/sobre.tsx <<'EOF'
+import { Text, View } from "react-native";
+
+export default function Sobre() {
+  return (
+    <View className="flex-1 items-center justify-center bg-white">
+      <Text className="text-xl text-gray-700">Tela Sobre</Text>
+    </View>
+  );
+}
+EOF
+
+npx expo start --clear
