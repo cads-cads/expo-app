@@ -1,0 +1,29 @@
+O GitHub CLI (gh) é uma ferramenta de terminal para interagir com o GitHub sem precisar abrir o navegador. Aqui estão os principais comandos.
+🚀 Comandos básicos do gh
+1. Autenticação
+Comando Função
+gh auth login Entrar na sua conta GitHub
+gh auth status Verificar se está conectado
+gh auth logout Sair da conta
+gh auth refresh Atualizar permissões de acesso
+2. Repositórios
+Comando Função
+gh repo list Listar seus repositórios
+gh repo view Ver informações do repositório atual
+gh repo create Criar um repositório
+gh repo clone usuario/repositorio Clonar um repositório
+gh repo fork Criar um fork
+gh repo view --web Abrir o repositório no navegador
+
+git init
+git add .
+git commit -m "Initial commit"
+gh repo create meu-projeto --public --source=. --remote=origin --push
+
+gh repo delete usuario/nome-do-repo --yes
+
+gh repo view --web
+
+gh repo view                  # Ver detalhes no terminal
+gh repo view usuario/repo --web  # Abrir um repo específico
+gh browse                    # Abrir o repositório no navegador
