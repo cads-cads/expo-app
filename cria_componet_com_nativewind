@@ -1,0 +1,43 @@
+import { View, ViewProps } from "react-native";
+import { twMerge } from "tailwind-merge";
+
+type Props = ViewProps & {
+  w?: string;
+  h?: string;
+  bg?: string;
+  className?: string;
+};
+
+export function Box({ w = "w-full", h = "h-12", bg = "bg-white", className, ...rest }: Props) {
+  return <View className={twMerge(w, h, bg, className)} {...rest} />;
+}
+
+import { Pressable, Text, PressableProps } from "react-native";
+import { twMerge } from "tailwind-merge";
+
+type Props = PressableProps & {
+  title: string;
+  variant?: "primary" | "outline";
+  className?: string;
+};
+
+const variants = {
+  primary: "bg-blue-600 active:bg-blue-700",
+  outline: "border border-blue-600 active:bg-blue-50",
+};
+
+const textVariants = {
+  primary: "text-white",
+  outline: "text-blue-600",
+};
+
+export function Button({ title, variant = "primary", className, ...rest }: Props) {
+  return (
+    <Pressable
+      className={twMerge("rounded-xl px-4 py-3 items-center", variants[variant], className)}
+      {...rest}
+    >
+      <Text className={twMerge("font-semibold", textVariants[variant])}>{title}</Text>
+    </Pressable>
+  );
+}
