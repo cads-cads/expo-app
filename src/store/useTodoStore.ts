@@ -1,21 +1,9 @@
 import {create} from "zustand";
 import {persist, createJSONStorage} from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-export type Tarefa = {
-  id: string;
-  text: string;
-  concluida: boolean;
-};
+import {Tarefa, TodoStore} from "@/types/tarefa";
 
-type TodoStore = {
-  tarefas: Tarefa[];
- adicionar: () => void;
- alternar: (id: string) => void;
- remover: (id: string) => void;
-  limpa: () => void;
-  txt: string;
-  setTxt: (t: string) => void;
-};
+
 
 export const useTodoStore = create<TodoStore>() (
   persist(
@@ -26,7 +14,7 @@ export const useTodoStore = create<TodoStore>() (
         adicionar() {
            const texto = get().txt.trim();
             if(!texto) return; 
-            const nova: Tarefa = {
+            const nova: Tarefa= {
               id: Date.now().toString(),
               text: texto,
               concluida: false,
@@ -53,7 +41,7 @@ export const useTodoStore = create<TodoStore>() (
         limpa() {
           set({  txt: ""});
         },
-      
+
         setTxt(t: string) {
           set({ txt: t });
         },
